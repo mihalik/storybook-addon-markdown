@@ -4,7 +4,7 @@
 
 A React Storybook addon to show documentation in markdown format.
 
-![](https://cldup.com/5TsRkHW2QE.png)
+![](https://cldup.com/BqlCR8pOBG.png)
 
 ## Usage
 
