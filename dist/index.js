@@ -25,6 +25,8 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
+exports.addWithMarkdown = addWithMarkdown;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -69,3 +71,9 @@ exports.default = function (markdown) {
     return _react2.default.createElement(MarkdownDecorator, { story: story, markdown: markdown, channel: _storybookAddons2.default.getChannel() });
   };
 };
+
+function addWithMarkdown(name, markdown, story) {
+  this.add(name, function () {
+    return _react2.default.createElement(MarkdownDecorator, { story: story, markdown: markdown, channel: _storybookAddons2.default.getChannel() });
+  });
+}

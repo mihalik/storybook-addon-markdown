@@ -43,4 +43,30 @@ storiesOf('ButtonSimple')
   );
 ```
 
-> Have a look at [this example](example/story.js) stories to see the example usage.
+**Want to change the markdown per component?**
+
+Add the following in `config.js` before the `configure()` call.
+
+```js
+import {addWithMarkdown} from 'storybook-addon-markdown';
+
+setAddon({addWithMarkdown: addWithMarkdown});
+```
+
+Then you can write stories like this:
+
+```js
+storiesOf('Button Different')
+  .addWithMarkdown(
+    'first markdown',
+    '# First component\n\nThis is markdown',
+    () => <Button label="The Button" onClick={action('onClick')} />,
+  )
+  .addWithMarkdown(
+    'second markdown',
+    '# Second component\n\nThis is markdown',
+    () => <Button label="The Button" onClick={action('onClick')} />,
+  );
+```
+
+> Have a look at [the example stories](example/story.js) to see different usage options.

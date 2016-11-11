@@ -21,3 +21,9 @@ export class MarkdownDecorator extends React.Component {
 export default (markdown) => (story) => (
   <MarkdownDecorator story={story} markdown={markdown} channel={addons.getChannel()} />
 );
+
+export function addWithMarkdown(name, markdown, story) {
+  this.add(name, () => {
+    return <MarkdownDecorator story={story} markdown={markdown} channel={addons.getChannel()} />;
+  });
+}
