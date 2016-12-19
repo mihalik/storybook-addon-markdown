@@ -4,7 +4,7 @@
 
 A React Storybook addon to show documentation in markdown format.
 
-![](https://cldup.com/_q_eaktFjS.png)
+![](https://cldup.com/BqlCR8pOBG.png)
 
 ## Usage
 
@@ -15,27 +15,17 @@ Install the following module:
 npm i -D mihalik/storybook-addon-markdown
 ```
 
-Set the addon in the place you configure storybook:
+Create an `addons.js` file within your storybook config directory:
 
 ```js
-import React from 'react';
-import {configure, setAddon} from '@kadira/storybook';
-import MarkdownAddon from 'storybook-addon-markdown';
-
-setAddon(MarkdownAddon);
-
-configure(function () {
-  require('../example/story');
-}, module);
+import '@kadira/storybook/addons';
+import 'storybook-addon-markdown/register';
 
 ```
 
-Then add a story for your markdown in stories.
+Then add a decorator to your stories.
 
 ```js
-import Button from './Button';
-const context = {Button};
-
 const details = `
 # The button component
 
@@ -46,22 +36,37 @@ const details = `
 `;
 
 storiesOf('ButtonSimple')
-  .addMarkdown('Documentation', doc, Button, context)
+  .addDecorator(markdownDecorator(details))
   .add(
     'simple usage',
     () => <ButtonSimple label="The Button" onClick={action('onClick')} />,
   );
 ```
 
-## `addMarkdown()` method
-* storyName - The name of the story
-* markdown - The markdown to display
-* primaryComponent - The React component the story is about.
-  * This is used to replace `#PROPS#` within your markdown with the props of the component
-* context - An object that contains all the components necessary to render the components in your markdown file.
+**Want to change the markdown per component?**
 
-## Markdown extensions
+Add the following in `config.js` before the `configure()` call.
 
-Use `preview` language type to display a preview of the component.  Shows the source code used to render the preview.  Use `inline` to render the component without showing the source code.  Use `#PROPS#` to display the props table.
+```js
+import {addWithMarkdown} from 'storybook-addon-markdown';
 
-*See example directory for examples*
+setAddon({addWithMarkdown: addWithMarkdown});
+```
+
+Then you can write stories like this:
+
+```js
+storiesOf('Button Different')
+  .addWithMarkdown(
+    'first markdown',
+    '# First component\n\nThis is markdown',
+    () => <Button label="The Button" onClick={action('onClick')} />,
+  )
+  .addWithMarkdown(
+    'second markdown',
+    '# Second component\n\nThis is markdown',
+    () => <Button label="The Button" onClick={action('onClick')} />,
+  );
+```
+
+> Have a look at [the example stories](example/story.js) to see different usage options.
