@@ -1,14 +1,29 @@
 import React from 'react';
-import {Story} from "@kadira/storybook-addons";
+import addons from "@kadira/storybook-addons";
 
-import MarkdownDisplay from './MarkdownDisplay';
+export class MarkdownDecorator extends React.Component {
 
-export default {
-  addMarkdown(storyName, markdown, primary, context) {
-    return this.add(storyName, () => {
-      return (
-        <MarkdownDisplay markdown={markdown} primary={primary} context={context} />
-      );
-    });
+  componentWillMount() {
+    this.props.channel.emit('addon-markdown/story-change', this.props.markdown);
   }
-};
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.story !== this.props.story) {
+      this.props.channel.emit('addon-markdown/story-change', nextProps.markdown);
+    }
+  }
+
+  render() {
+    return this.props.story();
+  }
+}
+
+export default (markdown) => (story) => (
+  <MarkdownDecorator story={story} markdown={markdown} channel={addons.getChannel()} />
+);
+
+export function addWithMarkdown(name, markdown, story) {
+  this.add(name, () => {
+    return <MarkdownDecorator story={story} markdown={markdown} channel={addons.getChannel()} />;
+  });
+}

@@ -2,8 +2,6 @@ import React from 'react';
 import marked from 'marked';
 import '!style!css!github-markdown-css/github-markdown.css';
 
-import reactPreview from './reactPreview';
-
 const styles = {
   base: {
     boxSizing: 'border-box',
@@ -12,13 +10,20 @@ const styles = {
   },
 };
 
-export default class MarkdownDisplay extends React.Component {
+export default class DocPanel extends React.Component {
+  state = {markdown: null};
+  constructor(props) {
+    super(props);
+    this.props.channel.on('addon-markdown/story-change', (markdown) => {
+      this.setState({markdown});
+    });
+  }
   render () {
-    const {markdown, context, primary} = this.props;
+    const {markdown} = this.state;
     if (!markdown) {
       return null;
     }
-    const html = marked(reactPreview(markdown, primary, context));
+    const html = marked(markdown);
     return (
       <div style={styles.base} className="markdown-body" dangerouslySetInnerHTML={{__html: html}} />
     );
