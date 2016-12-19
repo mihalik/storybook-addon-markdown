@@ -12,6 +12,18 @@ const inline = `
 * One
 * Two
 * Three
+
+\`\`\`preview
+<Button label="Inline Button" />
+\`\`\`
+
+\`\`\`js
+<Button label="Inline Button" />
+\`\`\`
+
+\`\`\`preview
+<Button label="Second Inline Button" />
+\`\`\`
 `;
 
 const inlineSecond = `
@@ -22,6 +34,7 @@ const inlineSecond = `
 |One|Two|
 `;
 
+const context = {Button};
 
 storiesOf('Button Readme')
   .addDecorator(markdownDecorator(readme))
@@ -35,7 +48,14 @@ storiesOf('Button Readme')
   );
 
 storiesOf('Button Inline')
-  .addDecorator(markdownDecorator(inline))
+  .addDecorator(markdownDecorator(inline, context))
+  .add(
+    'simple usage',
+    () => <Button label="The Button" onClick={action('onClick')} />,
+  );
+
+storiesOf('Button Empty')
+  .addDecorator(markdownDecorator(''))
   .add(
     'simple usage',
     () => <Button label="The Button" onClick={action('onClick')} />,
@@ -46,9 +66,11 @@ storiesOf('Button Different')
     'first markdown',
     inline,
     () => <Button label="The Button" onClick={action('onClick')} />,
+    context,
   )
   .addWithMarkdown(
     'second markdown',
     inlineSecond,
     () => <Button label="The Button" onClick={action('onClick')} />,
+    context,
   );
