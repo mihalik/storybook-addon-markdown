@@ -34,6 +34,10 @@ var _marked2 = _interopRequireDefault(_marked);
 
 require('!style!css!github-markdown-css/github-markdown.css');
 
+var _reactPreview = require('./reactPreview');
+
+var _reactPreview2 = _interopRequireDefault(_reactPreview);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
@@ -44,35 +48,30 @@ var styles = {
   }
 };
 
-var DocPanel = function (_React$Component) {
-  (0, _inherits3.default)(DocPanel, _React$Component);
+var MarkdownDisplay = function (_React$Component) {
+  (0, _inherits3.default)(MarkdownDisplay, _React$Component);
 
-  function DocPanel(props) {
-    (0, _classCallCheck3.default)(this, DocPanel);
-
-    var _this = (0, _possibleConstructorReturn3.default)(this, (DocPanel.__proto__ || (0, _getPrototypeOf2.default)(DocPanel)).call(this, props));
-
-    _this.state = { markdown: null };
-
-    _this.props.channel.on('addon-markdown/story-change', function (markdown) {
-      _this.setState({ markdown: markdown });
-    });
-    return _this;
+  function MarkdownDisplay() {
+    (0, _classCallCheck3.default)(this, MarkdownDisplay);
+    return (0, _possibleConstructorReturn3.default)(this, (MarkdownDisplay.__proto__ || (0, _getPrototypeOf2.default)(MarkdownDisplay)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(DocPanel, [{
+  (0, _createClass3.default)(MarkdownDisplay, [{
     key: 'render',
     value: function render() {
-      var markdown = this.state.markdown;
+      var _props = this.props,
+          markdown = _props.markdown,
+          context = _props.context,
+          primary = _props.primary;
 
       if (!markdown) {
         return null;
       }
-      var html = (0, _marked2.default)(markdown);
+      var html = (0, _marked2.default)((0, _reactPreview2.default)(markdown, primary, context));
       return _react2.default.createElement('div', { style: styles.base, className: 'markdown-body', dangerouslySetInnerHTML: { __html: html } });
     }
   }]);
-  return DocPanel;
+  return MarkdownDisplay;
 }(_react2.default.Component);
 
-exports.default = DocPanel;
+exports.default = MarkdownDisplay;

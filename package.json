@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "build": "./scripts/prepublish.sh",
     "lint": "eslint src",
     "lintfix": "eslint src --fix",
     "storybook": "start-storybook -p 9010"
