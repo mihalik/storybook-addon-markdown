@@ -8,8 +8,6 @@ var _storybookAddons = require('@kadira/storybook-addons');
 
 var _storybookAddons2 = _interopRequireDefault(_storybookAddons);
 
-var _storybook = require('@kadira/storybook');
-
 var _MarkdownPanel = require('./MarkdownPanel');
 
 var _MarkdownPanel2 = _interopRequireDefault(_MarkdownPanel);
