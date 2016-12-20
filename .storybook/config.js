@@ -1,8 +1,8 @@
 import React from 'react';
 import {configure, setAddon} from '@kadira/storybook';
-import {addWithMarkdown} from '../src';
+import MarkdownAddon from '../src';
 
-setAddon({addWithMarkdown: addWithMarkdown});
+setAddon(MarkdownAddon);
 
 configure(function () {
   require('../example/story');

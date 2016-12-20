@@ -32,7 +32,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.5.0",
+    "buble": "^0.14.2",
     "github-markdown-css": "^2.4.1",
+    "highlight.js": "^9.9.0",
     "marked": "^0.3.6"
   },
   "main": "dist/index.js",

@@ -10,10 +10,22 @@ const Button = ({ disabled, label, style, onClick }) => (
 
 Button.displayName = 'Button';
 Button.propTypes = {
-  label: React.PropTypes.string.isRequired,
-  style: React.PropTypes.object,
-  disabled: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
+    /**
+     * Label used on the button
+     */
+    label: React.PropTypes.string.isRequired,
+    /**
+     * Style of the button as an inline style object
+     */
+    style: React.PropTypes.object,
+    /**
+     * Sets disabled flag on the button component
+     */
+    disabled: React.PropTypes.bool,
+    /**
+     * Click event handler function (receives an event)
+     */
+    onClick: React.PropTypes.func,
 };
 
 export default Button;
