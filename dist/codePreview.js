@@ -82,6 +82,5 @@ function generatePreview(markdown, primary, context) {
       markdown = markdown.replace(match[0], renderComponent(_component, context));
     }
   }
-  console.log(markdown);
   return markdown;
 }

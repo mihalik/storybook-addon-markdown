@@ -60,6 +60,5 @@ export default function generatePreview(markdown, primary, context) {
       markdown = markdown.replace(match[0], renderComponent(component, context));
     }
   }
-  console.log(markdown);
   return markdown;
 }
